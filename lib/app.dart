@@ -11,26 +11,29 @@ class GithubViewerApp extends StatelessWidget {
       home: SplashPage());
 }
 
-class SplashPage extends StatelessWidget {
+class SplashPage extends StatefulWidget {
+  @override
+  _SplashPageState createState() => _SplashPageState();
+}
+
+class _SplashPageState extends State<SplashPage> {
+  @override
+  void initState() {
+    super.initState();
+
+    Future.delayed(Duration(milliseconds: 1500)).then((_) => {
+          Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(builder: (context) => LoginPage()),
+              (route) => false)
+        });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         body: SafeArea(
-      child: Center(
-        child: Column(
-          children: <Widget>[
-            Text(
-              "Splash",
-              style: TextStyle(fontSize: 40.0),
-            ),
-            RaisedButton(
-              onPressed: () => Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (context) => LoginPage())),
-              child: Text("Login"),
-            )
-          ],
-        ),
-      ),
-    ));
+            child: Center(
+                child: Text("Splash", style: TextStyle(fontSize: 40.0)))));
   }
 }
